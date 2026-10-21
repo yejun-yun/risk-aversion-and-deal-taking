@@ -1,0 +1,11 @@
+[project]
+name = "risk-aversion-and-deal-taking"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "inspect-ai>=0.3.277",
+    "matplotlib>=3.11.2",
+    "openai>=3.26.0",
+    "pandas>=3.0.6",
+    "pyarrow>=25.0.1",
+]
