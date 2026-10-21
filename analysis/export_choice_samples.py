@@ -1,5 +1,5 @@
 """Export both observed choice outcomes for every bar in the safe-choice chart.
-Run from any directory: .venv/bin/python export_choice_samples.py
+Run from any directory: .venv/bin/python analysis/export_choice_samples.py
 """
 import html
 import json
@@ -10,7 +10,7 @@ from statistics import median
 from inspect_ai.log import read_eval_log
 from analyze import SETTINGS, letter, model_name
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 CONFIGS = [
     ('qwen3-14b (vllm)', 'baseline', 'Untrained, no prompt'),
     ('qwen3-14b (vllm)', 'ra_generic', '“Be risk-averse” prompt'),
@@ -67,7 +67,7 @@ def main():
 
     intro = '''# Actual responses on both sides of each choice
 
-This accompanies the safe-choice chart, `figures/safe_choice.png`.
+This accompanies the safe-choice chart, `../figures/safe_choice.png`.
 All six configurations are **Qwen3-14B**, evaluated on the same vLLM server; there are no frontier models in this chart.
 Each section includes the full recorded prompt, available reasoning, response text, tool calls and tool results for selected episodes. Text is copied from the logs without shortening or correcting it. “Logged reasoning” is model-generated text, not an independently verified explanation of its behavior. No hidden or redacted reasoning is reconstructed.
 
@@ -75,7 +75,7 @@ Each section includes the full recorded prompt, available reasoning, response te
 
 **Selection:** One example per observed outcome for each of 18 chart bars. Prefer an identical question ID with both outcomes across repeated runs, choosing the ID with the most observations on its rarer side (ties by ID). Within each side, choose the response nearest its median assistant-text length (ties by ID and epoch). If no question has both outcomes, select median-length examples from each side across that entire bar. This is a reproducible illustrative selection, not a claim that a trace is statistically representative of all reasoning. Counts show how common each outcome really was. A missing outcome is explicitly marked; no substitute is taken from another run/configuration. Rare counterexamples receive equal space here but not equal statistical weight.
 
-The experiment used five repeated runs per question, at temperature 0.6. Counts below exclude unparsed/no-decision samples, matching the chart. Percentages are unrounded here to distinguish 99% from 100%. See `results.md` for experimental caveats. Source log paths, sample IDs and epochs make every selection traceable.
+The experiment used five repeated runs per question, at temperature 0.6. Counts below exclude unparsed/no-decision samples, matching the chart. Percentages are unrounded here to distinguish 99% from 100%. See `../README.md` for experimental caveats. Source log paths, sample IDs and epochs make every selection traceable.
 '''
     out = [intro, '## Coverage\n', '| Configuration | Setting | Safe | Long shot | Safe rate | No decision |\n|---|---|---:|---:|---:|---:|']
     sections = []
@@ -128,7 +128,7 @@ The experiment used five repeated runs per question, at temperature 0.6. Counts 
     overview = '\n'.join(out)
     out.extend(['\n## Contents\n']+[f'- [{title}](#{anchor})' for anchor, title, _ in sections])
     out.extend(f'\n<a id="{anchor}"></a>\n\n'+body for anchor, _, body in sections)
-    target = ROOT / 'choice_samples.md'
+    target = ROOT / 'results/samples/choice_samples.md'
     target.write_text('\n'.join(out)+'\n')
     # Standalone browser copy with collapsible sections and preserved verbatim text.
     parts = ['<!doctype html><html lang="en"><meta charset="utf-8"><title>Choice samples</title><style>body{max-width:1050px;margin:40px auto;padding:0 24px;font:17px/1.55 system-ui;color:#202124}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.6 ui-monospace,monospace}summary{cursor:pointer;font-weight:650;padding:18px;background:#edf2f7}details{margin:16px 0;border:1px solid #ddd}details pre{padding:20px}a{color:#155ab6}</style><body>', '<pre>'+html.escape(overview)+'</pre>', '<nav><ol>']

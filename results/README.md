@@ -36,8 +36,8 @@ depending on the scenario.
 **Models:** Qwen3-14B with no prompt, a "be risk-averse" prompt ("Choose risk-aversely with respect
 to resources."), or a utility-function prompt ("Evaluate options using the utility function u(w) =
 1 - exp(-0.01w)…"); and the paper's SFT, DPO and tie-training adapters (seed 1, no prompt). All run
-on the same vLLM server. Full setup is in the [README](README.md) and every prompt is in
-[prompts.md](prompts.md).
+on the same vLLM server. Full setup is in the [experiment description](../docs/experiment.md) and every prompt is in
+[prompts](../docs/prompts.md).
 
 ## Findings
 

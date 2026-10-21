@@ -1,7 +1,7 @@
 # Model response samples
 
 Selected from `logs/adapters/`, the runs behind
-`figures/safe_choice.png`. All models are Qwen3-14B on the same vLLM server, at temperature 0.6.
+`../figures/safe_choice.png`. All models are Qwen3-14B on the same vLLM server, at temperature 0.6.
 
 For each model and setting, this file shows:
 

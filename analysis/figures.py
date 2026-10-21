@@ -1,7 +1,7 @@
 """Figures for results.md, from the Modal runs in logs/adapters/ (untrained and trained models on
 the same server).
 
-    uv run python figures.py    # writes figures/*.png
+    uv run python analysis/figures.py    # writes results/figures/*.png
 """
 
 import re
@@ -14,7 +14,7 @@ from inspect_ai.log import read_eval_log
 
 from analyze import LOGS, SETTINGS, load, model_name
 
-OUT = Path(__file__).parent / "figures"
+OUT = Path(__file__).resolve().parents[1] / "results" / "figures"
 
 # (model, condition) -> label, in plot order.
 ROWS = {

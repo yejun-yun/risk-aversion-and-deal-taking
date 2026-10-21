@@ -2,7 +2,7 @@
 format, and compare with the paper's reported numbers (Qwen3-14B, medium-stakes validation,
 Cooperate %: base 9.5, SFT 72.1, DPO 61.9, tie 70.4).
 
-    uv run inspect eval repro.py --model openai-api/remote/sft --temperature 0.6 --top-p 0.95
+    uv run inspect eval experiments/repro.py --model openai-api/remote/sft --temperature 0.6 --top-p 0.95
 """
 
 import csv

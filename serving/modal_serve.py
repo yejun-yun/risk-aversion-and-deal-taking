@@ -3,10 +3,10 @@
 Served model names: "base" (no adapter), "sft", "dpo", "tie" (seed 1 of each method, from
 https://huggingface.co/MIT-SERC-risk-averse-AIs/risk-averse-ai-adapter-archive).
 
-    uv run --with modal==1.1.0 modal deploy modal_serve.py   # start (scales to zero when idle)
+    uv run --with modal==1.1.0 modal deploy serving/modal_serve.py   # start (scales to zero when idle)
     uv run --with modal==1.1.0 modal app stop deal-taking-vllm   # stop
 
-Requires a Modal secret named deal-taking-vllm-key holding VLLM_API_KEY (run_adapters.sh creates it).
+Requires a Modal secret named deal-taking-vllm-key holding VLLM_API_KEY (scripts/run_adapters.sh creates it).
 """
 
 import os

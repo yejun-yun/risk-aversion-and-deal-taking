@@ -7,7 +7,7 @@ share of choices matching each prediction:
     CARA (0.01)    cooperate in normal, defect in mirror
     compliant      cooperate in both
 
-    uv run python analyze.py [log_dir ...]    # default: logs/openrouter and logs/adapters
+    uv run python analysis/analyze.py [log_dir ...]    # default: logs/openrouter and logs/adapters
 """
 
 import re
@@ -17,10 +17,10 @@ from pathlib import Path
 import pandas as pd
 from inspect_ai.log import read_eval_log
 
-LOGS = Path(__file__).resolve().parent / "logs"
+LOGS = Path(__file__).resolve().parents[1] / "logs"
 SETTINGS = {"deals": "vignette", "deal_env": "environment", "lottery": "lottery"}
 
-# Models served by modal_serve.py, named after what they are.
+# Models served by serving/modal_serve.py, named after what they are.
 REMOTE = {"base": "qwen3-14b (vllm)", "sft": "qwen3-14b + sft", "dpo": "qwen3-14b + dpo",
           "tie": "qwen3-14b + tie"}  # fmt: skip
 
